@@ -31,3 +31,10 @@ class Logic :
         boarder = self.boarder[self.current_player].get(y)
         if boarder != None :
             new_set.add(boarder)
+
+    def find_winner(self):
+        sets = self.sets[self.current_player]
+        boarder = self.boarder[self.current_player]
+        for set in sets :
+            if boarder[0] in set and boarder[self.size-1] in set:
+                return self.current_player
