@@ -2,7 +2,10 @@ import numpy as np
 
 class Logic :
     def __init__(self, size, current_player):
-        self.size = size
+        if 2 <= size <= 64 :
+            self.size = size
+        else :
+            print("Error, size is too small or too big") #A modifier : afficher une fenêtre avec un message d'erreur
         self.board = np.zeros((size, size))
         self.sets = {"red" : [], "blue" : []}
         self.boarder = {"red" : {0 : "top", size-1 : "bottom"}, "blue" : {0 : "left", size-1 : "right"}}
@@ -14,7 +17,11 @@ class Logic :
                 yield self.board[x+offset_x, y+offset_y]
 
     def place_token(self, new_color, x, y):
-        self.board[x, y] = new_color
+        if self.board[x, y] != 0 :
+            print("Error, there is already a token here") #A modifier : afficher une fenêtre avec un message d'erreur
+        else :
+            self.board[x, y] = new_color
+            self.add_token(x, y)
 
     def add_token(self, x, y):
         neighbor_sets = []
